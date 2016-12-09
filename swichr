@@ -117,7 +117,7 @@ then
 fi
 
 # Fill the templates
-for entry in $TEMPLATEDIR/*
+for entry in $(find $TEMPLATEDIR -type f)
 do
 
     TMPENTRY="$BASEDIR/tmp/${entry##*/}"
