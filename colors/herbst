@@ -1,0 +1,25 @@
+! -- Author: illu
+! -- Title: herbst
+! -- Created: 2016
+! -- Wall: herbst.jpg
+
+#define bg      #302020
+#define fg      #ad9478
+#define blk     #523c3d
+#define bblk    #4b3636
+#define red     #d15049
+#define bred    #ac382f
+#define grn     #7b8748
+#define bgrn    #647035
+#define ylw     #a86051
+#define bylw    #8f5840
+#define blu     #535c5c
+#define bblu    #444b4b
+#define mag     #775759
+#define bmag    #614445
+#define cyn     #6d715e
+#define bcyn    #585c49
+#define wht     #ad9476
+#define bwht    #d8b893
+
+

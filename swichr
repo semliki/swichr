@@ -1,0 +1,171 @@
+#!/bin/bash
+# swichr
+# by illu
+# Bash script to easily change colorschemes using a simple templating system
+# Inspired by dkeg's gtkColor script (https://github.com/dkeg/inspin/blob/master/gtkColor)
+
+# Main directories the script will use
+BASEDIR=/set/me
+COLORDIR=$BASEDIR/colors
+TEMPLATEDIR=$BASEDIR/templates
+WALLPAPERDIR=$BASEDIR/walls
+DEBUG=false
+
+# Get command line flags
+while getopts :s:c:t:w:b:dh option
+do
+        case "${option}"
+        in
+                s) SCHEMENAME=${OPTARG};;
+                b) BASEDIR=${OPTARG};;
+                c) COLORDIR=${OPTARG};;
+                t) TEMPLATEDIR=${OPTARG};;
+                w) WALLPAPERDIR=${OPTARG};;
+                d) DEBUG=true;;
+                h) echo -e  "Usage: swichr -s [COLORSCHEME] [OPTION]...\nChange color schemes easily using a templating system.\n\n  -s     color scheme name\n  -c     set a custom color scheme directory\n  -b     set a custom base directory\n  -t     set a custom template directory\n  -w     set a custom wallpaper directory\n  -d     debug mode\n  -h     display this help text\n"
+                   exit 0
+                ;;
+                \?) echo -e "swichr: invalid option -- '$OPTARG'\nType 'swichr -h' for more information."
+                    exit 1
+                ;;
+                :) echo -e "swichr: option requires an argument -- '$OPTARG'\nType 'swichr -h' for more information."
+                   exit 1
+                ;;
+        esac
+done
+
+# Check if dirs exist, if not, create
+if [ ! -d $COLORDIR ]
+then
+    mkdir $COLORDIR
+fi
+if [ ! -d $TEMPLATEDIR ]
+then
+    mkdir $TEMPLATEDIR
+fi
+if [ ! -d $WALLPAPERDIR ]
+then
+    mkdir $WALLPAPERDIR
+fi
+
+# Check for various things
+while [ ! "$1" = "-h" ]
+do
+    # I'm completely aware of how ugly this looks if you have a better way of doing this, send to halp
+    if [ -z $SCHEMENAME ]
+    then
+        echo -e "swichr: required flag 's' is not present.\nType 'swichr -h' for more information."
+        exit 1
+    elif [ ! -f "$COLORDIR/$SCHEMENAME" ]
+    then
+        echo -e "swichr: $COLORDIR/$SCHEMENAME: No such file or directory"
+        exit 1
+    elif [ ! -f "$WALLPAPERDIR/$(cat $COLORDIR/$SCHEMENAME | grep 'Wall' | awk '{print $4}')" ]
+    then
+        echo -e "swichr: $WALLPAPERDIR/$(cat $COLORDIR/$SCHEMENAME | grep 'Wall' | awk '{print $4}'): No such file or directory"
+        exit 1
+    elif [ ! -n "$(ls $TEMPLATEDIR)" ]
+    then
+        echo -e "swichr: There are no templates in the template directory."
+        exit 1
+    else
+        break
+    fi
+done
+
+
+COLORSCHEME="$COLORDIR/$SCHEMENAME"
+SCHEMETITLE=$(cat $COLORSCHEME | grep 'Title' | awk '{print $4}')
+SCHEMEAUTHOR=$(cat $COLORSCHEME | grep 'Author' | awk '{print $4}')
+SCHEMEWALL="$WALLPAPERDIR/$(cat $COLORSCHEME | grep 'Wall' | awk '{print $4}')"
+
+echo -e "Selected theme $SCHEMETITLE by $SCHEMEAUTHOR."
+
+# This is probably going to be a bit ugly, but I want to make sure the vars are correct
+# Colors
+
+BG_COLOR=$(cat $COLORSCHEME | grep -w 'bg' | awk '{print $3}')
+FG_COLOR=$(cat $COLORSCHEME | grep -w 'fg' | awk '{print $3}')
+HL_COLOR=$(cat $COLORSCHEME | grep -w 'hl' | awk '{print $3}')
+NA_COLOR=$(cat $COLORSCHEME | grep -w 'na' | awk '{print $3}')
+BLK=$(cat $COLORSCHEME | grep -w 'blk' | awk '{print $3}')
+BBLK=$(cat $COLORSCHEME | grep -w 'bblk' | awk '{print $3}')
+RED=$(cat $COLORSCHEME | grep -w 'red' | awk '{print $3}')
+BRED=$(cat $COLORSCHEME | grep -w 'bred' | awk '{print $3}')
+BLU=$(cat $COLORSCHEME | grep -w 'blu' | awk '{print $3}')
+BBLU=$(cat $COLORSCHEME | grep -w 'bblu' | awk '{print $3}')
+GRN=$(cat $COLORSCHEME | grep -w 'grn' | awk '{print $3}')
+BGRN=$(cat $COLORSCHEME | grep -w 'bgrn' | awk '{print $3}')
+YLW=$(cat $COLORSCHEME | grep -w 'ylw' | awk '{print $3}')
+BYLW=$(cat $COLORSCHEME | grep -w 'bylw' | awk '{print $3}')
+MAG=$(cat $COLORSCHEME | grep -w 'mag' | awk '{print $3}')
+BMAG=$(cat $COLORSCHEME | grep -w 'bmag' | awk '{print $3}')
+CYN=$(cat $COLORSCHEME | grep -w 'cyn' | awk '{print $3}')
+BCYN=$(cat $COLORSCHEME | grep -w 'bcyn' | awk '{print $3}')
+WHT=$(cat $COLORSCHEME | grep -w 'wht' | awk '{print $3}')
+BWHT=$(cat $COLORSCHEME | grep -w 'bwht' | awk '{print $3}')
+
+# Check if tmp dir exists, if not, create it
+if [ ! -d $BASEDIR/tmp ]
+then
+    mkdir $BASEDIR/tmp
+fi
+
+# Fill the templates
+for entry in $TEMPLATEDIR/*
+do
+
+    TMPENTRY="$BASEDIR/tmp/${entry##*/}"
+    DESTDIR=$(cat ${entry} | grep "#?" | grep "dest" | awk '{print $3}')
+
+    sed -e s/'$bg_swichr'/$BG_COLOR/g \
+        -e s/'$fg_swichr'/$FG_COLOR/g \
+        -e s/'$hl_swichr'/$HL_COLOR/g \
+        -e s/'$na_swichr'/$NA_COLOR/g \
+        -e s/'$wall_swichr'/${SCHEMEWALL//\//\\\/}/g \
+        -e s/'$blk_swichr'/$BLK/g \
+        -e s/'$bblk_swichr'/$BBLK/g \
+        -e s/'$red_swichr'/$RED/g \
+        -e s/'$bred_swichr'/$BRED/g \
+        -e s/'$blu_swichr'/$RED/g \
+        -e s/'$bblu_swichr'/$RED/g \
+        -e s/'$grn_swichr'/$GRN/g \
+        -e s/'$bgrn_swichr'/$BGRN/g \
+        -e s/'$ylw_swichr'/$YLW/g \
+        -e s/'$bylw_swichr'/$BYLW/g \
+        -e s/'$mag_swichr'/$MAG/g \
+        -e s/'$bmag_swichr'/$BMAG/g \
+        -e s/'$cyn_swichr'/$CYN/g \
+        -e s/'$bcyn_swichr'/$BCYN/g \
+        -e s/'$wht_swichr'/$WHT/g \
+        -e s/'$bwht_swichr'/$BWHT/g \
+        ${entry} > $TMPENTRY
+
+    # Debug messages
+    if [ $DEBUG = true ]
+    then
+        echo -e "Temp file path: $TMPENTRY"
+        echo -e "Destination dir: $DESTDIR"
+    fi
+
+    # Copy the filled template from the tmp dir to the destination
+    if [ $DEBUG = false ]
+    then
+        cp $TMPENTRY $DESTDIR
+    fi
+
+done
+
+# Remove the tmp dir
+if [ $DEBUG = false ]
+then
+    rm -rf $BASEDIR/tmp
+fi
+
+# Debug messages
+if [ $DEBUG = true ]
+then
+    echo -e "Dirs\n\n  Base dir: $BASEDIR\n  Template dir: $TEMPLATEDIR\n  Color dir: $COLORDIR\n  Wallpaper dir: $WALLPAPERDIR\n\nColorscheme info\n\n  Colorscheme: '$SCHEMETITLE' $COLORSCHEME\n  Colorscheme Wall: $SCHEMEWALL\n"
+    echo -e "Colors\n\n  Background: $BG_COLOR\n  Foreground: $FG_COLOR\n  Highlight: $HL_COLOR\n  Inactive: $NA_COLOR\n  Black: $BLK\n  Light Black: $BBLK\n  Red: $RED\n  Bright Red: $BRED\n  Blue: $BLU\n  Bright Blue: $BBLU\n  Green: $GRN\n  Bright Green: $BGRN\n  Yellow: $YLW\n  Bright Yellow: $BYLW\n  Magenta: $MAG\n  Bright Magenta: $BMAG\n  Cyan: $CYN\n  Bright Cyan: $BCYN\n  White: $WHT\n  Bright White: $BWHT\n"
+    echo -e "If you're having any troubles, or have found any bugs, please report to my github (https://github.com/illumni), or email me directly at illumniggati@protonmail.com."
+fi

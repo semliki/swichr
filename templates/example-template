@@ -1,0 +1,10 @@
+# This below can be anywhere in the file, but it's necessary if you actually want templates to be placed in their proper place
+#? dest /home/illu/example-output
+
+example_var = $fg_swichr
+other_var = $wall_swichr
+something = $blu_swichr
+
+
+
+

@@ -1,0 +1,27 @@
+! -- Author: illu
+! -- Title: haus
+! -- Created: 2016
+! -- Wall: haus.jpg
+
+#define bg      #454547
+#define fg      #C5C4C2
+#define hl      #67868d
+#define na      #555557
+
+#define blk     #555557
+#define bblk    #555557
+#define red     #985253
+#define bred    #985253
+#define grn     #6d8250
+#define bgrn    #6d8250
+#define ylw     #af8c71
+#define bylw    #af8c71
+#define blu     #67868d
+#define bblu    #67868d
+#define mag     #90707a
+#define bmag    #90707a
+#define cyn     #849c9a
+#define bcyn    #849c9a
+#define wht     #c5c4c2
+#define bwht    #c5c4c2
+
