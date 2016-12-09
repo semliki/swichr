@@ -1,7 +1,9 @@
 Swichr
 ======
 
-Swichr is a small bash script that allows you to easily switch between colorschemes by using a system of templates. This script is inspired by [dkeg's](https://github.com/dkeg) script [gtkColor](https://github.com/dkeg/inspin/blob/master/gtkColor)
+Swichr is a small bash script that allows you to easily switch between colorschemes by using a system of templates. Gone are the days of editing every configuration file manually!
+
+This script is inspired by [dkeg's](https://github.com/dkeg) script [gtkColor](https://github.com/dkeg/inspin/blob/master/gtkColor). The color scheme layout is also inspired by his color scheme files [see here](https://github.com/dkeg/crayolo).
 
 
 Usage
