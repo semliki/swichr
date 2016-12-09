@@ -38,6 +38,9 @@ The first step is to make a colorscheme file. There are a couple included in thi
 #define fg      #000000
 #define hl      #000000
 #define na      #000000
+#define icbs    #000000
+#define icfr    #000000
+#define icbk    #000000
 
 #define blk     #000000
 #define bblk    #000000
@@ -60,6 +63,8 @@ The first step is to make a colorscheme file. There are a couple included in thi
 It's pretty much just a .Xresources file with some extra jazz. You can use whatever variable names, but be aware that you'll also have to change them in the script itself.
 
 The two variables `hl` and `na` correspond to highlight and inactive. These options are really only for window manager configurations (or whatever else you might like to use them for).
+
+The variables `icbs`, `icfr`, and `icbk` correspond to icon colors. See the [example template](https://github.com/illumni/swichr/blob/master/templates/example-template) for more information.
 
 The `Wall` variable in the header corresponds to the wallpaper for the colorscheme. You don't have to use paths for this, as the paths will be configured in the script.
 
@@ -98,6 +103,22 @@ In order to actually use the variables from the colorschemes you'll have to put 
 This works with any of the colors. If you want red, you'd use `$red_swichr`.
 
 All variables except for `$wall_swichr` should be in hex format. If you use a window manager (like spectrwm) that doesn't use hex, you may be out of luck. In the future I may add support for other color systems like that, but for now hex is the only option. As with the colorschemes, I will include a couple examples in the repo.
+
+You can also use this with svg-based icons. I use flattrcolor from the [wpgtk](https://github.com/deviantfero/wpgtk) repository. I'll include a template for this type 
+of file. Here's a snippet of how to use it:
+
+```xml
+    <path
+       style="fill:$icon_front_swichr;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 39 15 C 39 15 35 15 33 19 L 29 19 L 4 19 L 2 19 C 2 19 1.8680203 19.016906 1.7109375 19.058594 C 1.6649814 19.072636 1.6190155 19.081363 1.5761719 
+19.101562 C 1.3
+019415 19.211398 1 19.44477 1 20 L 1 22 L 1 23 L 1 57 C 1 57.55397 1.44603 58 2 58 L 62 58 C 62.55397 58 63 57.55397 63 57 L 63 18 L 63 16 C 63 15.44603 62.55397 15 
+62 15 L 6
+1 15 L 39 15 z "
+       transform="translate(384.57143,483.798)"
+       id="folderFront" />
+```
+
 
 Script Configuration
 --------------------

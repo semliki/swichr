@@ -93,6 +93,9 @@ BG_COLOR=$(cat $COLORSCHEME | grep -w 'bg' | awk '{print $3}')
 FG_COLOR=$(cat $COLORSCHEME | grep -w 'fg' | awk '{print $3}')
 HL_COLOR=$(cat $COLORSCHEME | grep -w 'hl' | awk '{print $3}')
 NA_COLOR=$(cat $COLORSCHEME | grep -w 'na' | awk '{print $3}')
+ICON_BASE_COLOR=$(cat $COLORSCHEME | grep -w 'icbs' | awk '{print $3}')
+ICON_FRONT_COLOR=$(cat $COLORSCHEME | grep -w 'icfr' | awk '{print $3}')
+ICON_BACK_COLOR=$(cat $COLORSCHEME | grep -w 'icbk' | awk '{print $3}')
 BLK=$(cat $COLORSCHEME | grep -w 'blk' | awk '{print $3}')
 BBLK=$(cat $COLORSCHEME | grep -w 'bblk' | awk '{print $3}')
 RED=$(cat $COLORSCHEME | grep -w 'red' | awk '{print $3}')
@@ -145,6 +148,9 @@ do
         -e s/'$bcyn_swichr'/$BCYN/g \
         -e s/'$wht_swichr'/$WHT/g \
         -e s/'$bwht_swichr'/$BWHT/g \
+        -e s/'$icon_base_swichr'/$ICON_BASE_COLOR/g \
+        -e s/'$icon_front_swichr'/$ICON_FRONT_COLOR/g \
+        -e s/'$icon_back_swichr'/$ICON_BACK_COLOR/g \
         -e /'#? dest'/d \
         ${entry} > $TMPENTRY
 

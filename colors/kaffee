@@ -7,6 +7,9 @@
 #define fg      #bab1a1
 #define hl      #bab1a1
 #define na      #5d4a44
+#define icbs    #bab1a1
+#define icfr    #bab1a1
+#define icbk    #989184
 
 #define blk     #302724
 #define bblk    #302724

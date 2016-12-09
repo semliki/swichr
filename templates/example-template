@@ -15,6 +15,13 @@ something = $blu_swichr
 # na_swichr     - Inactive
 # wall_swichr   - Wallpaper (Reminder that this is a file path)
 #
+# My recommended iconpack is flattrcolor which can be found in the same repository as wpgtk (https://github.com/deviantfero/wpgtk),
+# but should theoretically work with any svg-based icon set.
+#
+# icon_base_swichr  - Icon base color. The base color for icons. (I usually pick the highlight color for this)
+# icon_front_swichr - Icon front color. This could be the same as base, but it basically acts as the main color for folders and such.
+# icon_back_swichr  - Icon back color. This should be darker than front. When used with folder icons, it'll display as the back color.
+#
 # blk_swichr    - Black
 # bblk_swichr   - Bright Black
 # red_swichr    - Red
