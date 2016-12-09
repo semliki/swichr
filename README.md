@@ -67,7 +67,7 @@ The `Wall` variable in the header corresponds to the wallpaper for the colorsche
 Templates
 ---------
 
-Templates can be anything. GTK themes, window manager configurations, xresources files, etc. The template system is very simple and easy to remember.
+Templates can be anything. GTK themes, window manager configurations, xresources files, etc. The template system is very simple and easy to use.
 
 A template should have `#? dest /filled/template/destination/here` somewhere in the file. It shouldn't matter whether it's at the bottom or the top, so long as it's in there. If it isn't, the template won't be moved to the destination.
 
