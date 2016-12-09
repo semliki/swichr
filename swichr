@@ -145,6 +145,7 @@ do
         -e s/'$bcyn_swichr'/$BCYN/g \
         -e s/'$wht_swichr'/$WHT/g \
         -e s/'$bwht_swichr'/$BWHT/g \
+        -e /'#? dest'/d \
         ${entry} > $TMPENTRY
 
     echo -e "\e[32mFilled\e[0m template \e[34m${entry##*/}\e[0m..."
