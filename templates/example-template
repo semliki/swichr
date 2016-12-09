@@ -1,9 +1,37 @@
-# This below can be anywhere in the file, but it's necessary if you actually want templates to be placed in their proper place
+## This below is required, but can be anywhere in the file.
 #? dest /home/illu/example-output
+
+## Below shows an example of how to use the variables.
 
 example_var = $fg_swichr
 other_var = $wall_swichr
 something = $blu_swichr
+
+## Here is a list of all the variables (Without the $)
+
+# bg_swichr     - Background
+# fg_swichr     - Foreground
+# hl_swichr     - Highlight
+# na_swichr     - Inactive
+# wall_swichr   - Wallpaper (Reminder that this is a file path)
+#
+# blk_swichr    - Black
+# bblk_swichr   - Bright Black
+# red_swichr    - Red
+# bred_swichr   - Bright Red
+# blu_swichr    - Blue
+# bblu_swichr   - Bright Blue
+# grn_swichr    - Green
+# bgrn_swichr   - Bright Green
+# ylw_swichr    - Yellow
+# bylw_swichr   - Bright Yellow
+# mag_swichr    - Magenta
+# bmag_swichr   - Bright Magenta
+# cyn_swichr    - Cyan
+# bcyn_swichr   - Bright Cyan
+# wht_swichr    - White
+# bwht_swichr   - Bright White
+
 
 
 
