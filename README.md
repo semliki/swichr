@@ -9,6 +9,8 @@ This script is inspired by [dkeg's](https://github.com/dkeg) script [gtkColor](h
 Usage
 -----
 
+`git clone https://github.com/illumni/swichr.git`
+
 ```
 swichr -s [COLORSCHEME] [OPTIONS]...
 Change color schemes easily using a templating system.
@@ -18,6 +20,7 @@ Change color schemes easily using a templating system.
   -b     set a custom base directory
   -t     set a custom template directory
   -w     set a custom wallpaper directory
+  -k     view the currently installed scheme
   -d     debug mode
   -h     display this help text
 ```
@@ -110,11 +113,7 @@ of file. Here's a snippet of how to use it:
 ```xml
     <path
        style="fill:$icon_front_swichr;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 39 15 C 39 15 35 15 33 19 L 29 19 L 4 19 L 2 19 C 2 19 1.8680203 19.016906 1.7109375 19.058594 C 1.6649814 19.072636 1.6190155 19.081363 1.5761719 
-19.101562 C 1.3
-019415 19.211398 1 19.44477 1 20 L 1 22 L 1 23 L 1 57 C 1 57.55397 1.44603 58 2 58 L 62 58 C 62.55397 58 63 57.55397 63 57 L 63 18 L 63 16 C 63 15.44603 62.55397 15 
-62 15 L 6
-1 15 L 39 15 z "
+       d="M 39 15 C 39 15 35 15 33 19 L 29 19 L 4 19 L 2 19 C 2 19 1.8680203 19.016906 1.7109375 19.058594 C 1.6649814 19.072636 1.6190155 19.081363 1.5761719 19.101562 C 1.3019415 19.211398 1 19.44477 1 20 L 1 22 L 1 23 L 1 57 C 1 57.55397 1.44603 58 2 58 L 62 58 C 62.55397 58 63 57.55397 63 57 L 63 18 L 63 16 C 63 15.44603 62.55397 15 62 15 L 61 15 L 39 15 z "
        transform="translate(384.57143,483.798)"
        id="folderFront" />
 ```
@@ -137,4 +136,27 @@ WALLPAPERDIR=$BASEDIR/walls
 
 If swichr doesn't see these directories, it will automatically create them.
 
+Swichr also has a configuration option to setup a "linked script", which is a script to run after swichr runs. This could be linked to a screenshot tool, a color printing tool, or maybe a refresh utility used to refresh the gtk/icon/other themes without doing it manually.
 
+You would use it like so:
+
+`LINKEDSCRIPT=/path/to/script`
+`LINKEDSCRIPT=scrot -f`
+`LINKEDSCRIPT=archey3`
+
+Other
+-----
+
+- Swichr will automatically backup a destination file if it already exists.
+- All variables are required in a colorscheme file, but if you don't want to use a specific variable, you don't have to put them into the template(s).
+    - The wallpaper variable has to exist, but you don't have to call to it. If it doesn't exist, the script won't work. (A planned feature is to make wallpaper optional)
+- Swichr will output some variables into a file called `.current` in your home folder. It's use to print the current scheme. You can also use this file to help integrate swichr's changes into other files (i.e, a script that will automatically update the gtk theme or change the wallpaper)
+
+The `.current` file should look something like:
+
+```
+Base dir: /home/illu/.colorschemes
+Curr Scheme: /home/illu/.colorschemes/colors/haus
+Title: haus
+Author: illu
+```
