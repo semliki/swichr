@@ -9,7 +9,7 @@ This script is inspired by [dkeg's](https://github.com/dkeg) script [gtkColor](h
 Usage
 -----
 
-`git clone https://github.com/illumni/swichr.git`
+`git clone https://github.com/AndrewVanAllen/swichr.git`
 
 ```
 swichr -s [COLORSCHEME] [OPTIONS]...
